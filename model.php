@@ -15,7 +15,8 @@
 		 * Construir un nuevo modelo.
 		 */
 		public function __construct() {
-			$this->connection = new mysqli(Config::db_host, Config::db_user, Config::db_pass, Config::db_name);
+			$this->connection = new mysqli(Config::db_host, Config::db_user,
+				Config::db_pass, Config::db_name);
 			$this->connection->set_charset("UTF8");
 			$this->table = strtolower(get_class($this));
 			$this->id = strtolower(get_class($this))."id";
