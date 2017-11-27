@@ -6,10 +6,9 @@
  */
 final class View {
 	
-	static public function render($view, $params = []) {
-		foreach($params as $key => $value) {
+	static public function render ($view, $params = []) {
+		foreach ($params as $key => $value)
 			$$key = $value;
-		}
 		require_once Config::view_path . $view . ".php";
 	}
 }

@@ -26,7 +26,7 @@
 		 * 
 		 * @return bool
 		 */
-		static public function is_user_logged() {
+		static public function is_user_logged () {
 			return (isset($_SESSION['username']))? true : false;
 		}
 		
@@ -35,7 +35,7 @@
 		 * 
 		 * @return string|bool Nombre de usuario o *falso* si no hay una sesión iniciada.
 		 */
-		static public function user_logged() {
+		static public function user_logged () {
 			return (Config::is_user_logged())? $_SESSION['username'] : false;
 		}
 		
@@ -44,7 +44,7 @@
 		 * 
 		 * @return int|bool ID del usuario o *falso* si no hay una sesión iniciada.
 		 */
-		static public function user_logged_id() {
+		static public function user_logged_id () {
 			return (Config::is_user_logged())? $_SESSION['id'] : false;
 		}
 	}
