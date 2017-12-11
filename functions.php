@@ -18,6 +18,7 @@
 			echo "<h3>" . $error['title'] . "</h3>";
 			echo "<div>" . $error['content'] . "</div>";
 			echo "</div>";
+			setcookie($identifier, "", time() - 1);
 		}
 	}
 	
@@ -41,9 +42,11 @@
 	 * @param array $params Atributos opcionales.
 	 */
 	function link_css ($css, $params = []) {
-		echo "<link rel=\"stylesheet\" href=\"" . APP_PATH . "app/assets/css" . $css . ".css\"";
-		foreach ($params as $attr => $value)
-			echo " $attr=\"$value\"";
+		echo "<link rel=\"stylesheet\" href=\"" . APP_PATH . "app/assets/css/" . $css . ".css\"";
+		if (!empty($params)) {
+			foreach ($params as $attr => $value)
+				echo " $attr=\"$value\"";
+		}
 		echo " />";
 	}
 	
@@ -54,10 +57,12 @@
 	 * @param array $params Atributos opcionales.
 	 */
 	function link_script ($script, $params =[]) {
-		echo "<script src=\"" . APP_PATH . "app/assets/css" . $script . ".js\"";
-		foreach ($params as $attr => $value)
-			echo " $attr=\"$value\"";
-		echo "></script";
+		echo "<script src=\"" . APP_PATH . "app/assets/js/" . $script . ".js\"";
+		if (!empty($params)) {
+			foreach ($params as $attr => $value)
+				echo " $attr=\"$value\"";
+		}
+		echo "></script>";
 	}
 	
 	/**

@@ -4,7 +4,8 @@
 
 	// Edita el APP_PATH para que todos los enlaces funcionen correctamente
 	// IMPORTANTE que APP_PATH termine en /
-	define("APP_PATH", "http://localhost/skr/");
+	// Sustituir "/SkrFramework" por la ruta de tu aplicación dentro del servidor o dejar vacía.
+	define("APP_PATH", "http://" . $_SERVER['SERVER_NAME']. "/SkrFramework/");
 	
 	// Insertar archivos básicos del framework
 	require_once "application.php";
