@@ -1,12 +1,5 @@
 <?php
 	/**
-	 * Incluir el cierre de la estructura.
-	 */
-	function close () {
-		require_once Config::view_path . "base_close.php";
-	}
-	
-	/**
 	 * Mostrar un error en caso de que exista.
 	 * 
 	 * @param string $identifier Identificador del mensaje de error.
@@ -123,13 +116,6 @@
 			force_redirect();
 	}
 	
-	/**
-	 * Incluir la apertura de la estructura.
-	 */
-	function open () {
-		require_once Config::view_path . "base_open.php";
-	}
-
 	/**
 	 * Parsear la fecha y la hora en base a un string.
 	 * 
