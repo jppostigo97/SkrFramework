@@ -1,19 +1,19 @@
 <?php
 	class Application {
-		/** Controlador. (por defecto) */
+		/** Controller (and its default) */
 		public $controller = "MainController";
-		/** Método. (por defecto) */
+		/** Method (and its default) */
 		public $method = "index";
-		/** Parámetos adicionales en la URL. */
+		/** URL parameters */
 		public $params = [];
 		
 		/**
-		 * Configurar automáticamente y ejecutar la aplicación.
+		 * Automatically configure and execute your application.
 		 */
 		public function __construct () {
-			// Parsear URL
+			// Parse URL
 			$url = $this->parse_url();
-			// Controlador
+			// Load Controller
 			if (isset($url[0])) {
 				$controller_class = ucfirst(strtolower($url[0])) . "Controller";
 				$controller_file = Config::controller_path . $controller_class . ".php";
@@ -24,7 +24,7 @@
 			}
 			require_once Config::controller_path . $this->controller . ".php";
 			$this->controller = new $this->controller();
-			// Método
+			// Find the method
 			if (isset($url[1])) {
 				$method_name = strtolower($url[1]);
 				if (method_exists($this->controller, $method_name)) {
@@ -32,19 +32,20 @@
 					unset($url[1]);
 				}
 			}
-			// Parámetros
+			// Parse parameters
 			$this->params = ($url != null)? array_values($url) : [];
-			// Ejecutar
+			// Execute
 			if (method_exists($this->controller, $this->method)) {
 				call_user_func_array([$this->controller, $this->method],
 					$this->params);
 			} else {
 				force_redirect();
 			}
+			View::show();
 		}
 		
 		/**
-		 * Parsear la URL.
+		 * Parse the URL.
 		 */
 		private function parse_url () {
 			if (isset($_GET['url'])) {

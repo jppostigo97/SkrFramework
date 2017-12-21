@@ -1,8 +1,8 @@
 <?php
 	/**
-	 * Mostrar un error en caso de que exista.
+	 * Show an error message if it does exists.
 	 * 
-	 * @param string $identifier Identificador del mensaje de error.
+	 * @param string $identifier Error message identifier.
 	 */
 	function display_error ($identifier) {
 		if (isset($_COOKIE[$identifier])) {
@@ -16,11 +16,11 @@
 	}
 	
 	/**
-	 * Crear un mensaje de error.
+	 * Create an error message.
 	 * 
-	 * @param string $identifier Identificador del mensaje de error.
-	 * @param string $title Título del mensaje.
-	 * @param string $content Contenido del mensaje.
+	 * @param string $identifier Error message identifier.
+	 * @param string $title Message title.
+	 * @param string $content Message content.
 	 */
 	function error ($identifier, $title, $content) {
 		setcookie($identifier, serialize([
@@ -29,10 +29,10 @@
 	}
 	
 	/**
-	 * Enlazar una hoja de estilos.
+	 * Link a local stylesheet.
 	 * 
-	 * @param string $css Nombre de la hoja de estilos (sin .css).
-	 * @param array $params Atributos opcionales.
+	 * @param string $css Stylesheet filename (without extension).
+	 * @param array $params Optional attributes for the <link> tag.
 	 */
 	function link_css ($css, $params = []) {
 		echo "<link rel=\"stylesheet\" href=\"" . APP_PATH . "app/assets/css/" . $css . ".css\"";
@@ -44,10 +44,10 @@
 	}
 	
 	/**
-	 * Enlazar un archivo javascript.
+	 * Link a local javascript file.
 	 * 
-	 * @param string $script Nombre del script (sin el .js).
-	 * @param array $params Atributos opcionales.
+	 * @param string $script Script filename (without extension).
+	 * @param array $params Optional attributes for the <script> tag.
 	 */
 	function link_script ($script, $params =[]) {
 		echo "<script src=\"" . APP_PATH . "app/assets/js/" . $script . ".js\"";
@@ -59,11 +59,11 @@
 	}
 	
 	/**
-	 * Crear un hipervínculo.
+	 * Create an hyperlink.
 	 * 
-	 * @param string $link Dirección del enlace.
-	 * @param string $label Texto a mostrar en el enlace.
-	 * @param array $params Atributos opcionales.
+	 * @param string $link Link URL.
+	 * @param string $label Link label.
+	 * @param array $params Optional attributes for the <a> tag.
 	 */
 	function link_to ($link, $label, $params = []) {
 		echo "<a href=\"" . APP_PATH . $link . "\"";
@@ -73,9 +73,9 @@
 	}
 	
 	/**
-	 * Incluir el fichero que contiene un modelo, cargarlo y devolverlo.
+	 * Load, create an instance and return a model.
 	 * 
-	 * @param string $model_name Nombre del modelo.
+	 * @param string $model_name Model name.
 	 * @return Model
 	 */
 	function load_model ($model_name) {
@@ -91,9 +91,9 @@
 	}
 
 	/**
-	 * Incluir el fichero que contiene un asistente, cargarlo y devolverlo.
+	 * Load, create an instance and return a helper.
 	 * 
-	 * @param string $helper_name Nombre del asistente.
+	 * @param string $helper_name Helper name.
 	 * @return Helper
 	 */
 	function load_helper ($helper_name) {
@@ -109,7 +109,7 @@
 	}
 	
 	/**
-	 * Prohibir al usuario acceder si ha iniciado sesión.
+	 * Make the user unable to access if he/she is logged in.
 	 */
 	function forbid_login () {
 		if (Config::is_user_logged())
@@ -117,17 +117,19 @@
 	}
 	
 	/**
-	 * Parsear la fecha y la hora en base a un string.
+	 * Parse datetime.
 	 * 
-	 * @param string $format Formato.
-	 * @param string $date_time Fecha y hora a parsear.
+	 * @param string $format Date/time format.
+	 * @param string $date_time Date and time to parse.
 	 */
 	function parse_datetime ($format, $date_time) {
 		return DateTime::createFromFormat("Y-m-d H:i:s", $date_time)->format($format);
 	}
 
 	/**
-	 * Forzar la redirección.
+	 * Force a redirection.
+	 * 
+	 * @param string $url New location.
 	 */
 	function force_redirect ($url) {
 		header("Location: " . APP_PATH . $url);
@@ -135,8 +137,7 @@
 	}
 	
 	/**
-	 * Requerir que exista una sesión iniciada por parte del usuario.
-	 * En caso de que la sesión no esté iniciada, devuelve al usuario a la página principal.
+	 * Make the user unable to access if he/she isn't logged in.
 	 */
 	function require_login () {
 		if (!Config::is_user_logged())
@@ -144,11 +145,10 @@
 	}
 	
 	/**
-	 * Devolver o modificar el título de la página.
-	 * El título se modificará solo si se envía un string como parámetro.
+	 * Returns or modify page title.
 	 * 
-	 * @param string $title Nuevo título.
-	 * @return string Título actual.
+	 * @param string $title New title.
+	 * @return string Page title.
 	 */
 	function title ($title = "") {
 		if ($title != "") Config::$title = $title;

@@ -1,16 +1,16 @@
 <?php
 
 	/**
-	 * Clase Config (configuración).
-	 * Alberga información y configuraciones en forma de constantes y variables,
-	 * además de algunas funciones de propósitos variados.
+	 * Config class
+	 * Owns configurations and information inside its constants and variables,
+	 * also some functions.
 	 */
 	final class Config {
-		// Desarrollo
+		// Development
 		const DEBUG = true;
 		// Variables
 		static $title = "Skr PHP";
-		// Constantes
+		// Constants
 		const date_format      = "d/m/y";
 		const time_format      = "H:i";
 		const date_time_format = "d/m/y - H:i";
@@ -21,10 +21,11 @@
 		const controller_path  = "app/controllers/";
 		const helper_path      = "app/helpers/";
 		const model_path       = "app/models/";
+		const template_path    = "app/templates/";
 		const view_path        = "app/view/";
 		
 		/**
-		 * Comprobar si existe una sesión iniciada.
+		 * Check if an user is logged in.
 		 * 
 		 * @return bool
 		 */
@@ -33,9 +34,9 @@
 		}
 		
 		/**
-		 * Devolver el usuario que ha iniciado sesión.
+		 * Gets the logged user or *false*.
 		 * 
-		 * @return string|bool Nombre de usuario o *falso* si no hay una sesión iniciada.
+		 * @return string|bool Username or *false* if there is no user logged in.
 		 */
 		static public function user_logged () {
 			return (Config::is_user_logged())? $_SESSION['id'] : false;

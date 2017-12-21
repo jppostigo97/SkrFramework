@@ -1,33 +1,68 @@
 <?php
 	/**
-	 * Clase View (vista).
-	 * Se encarga de mostrar correctamente la página requerida y de pasarle los parámetros que tenemos.
+	 * View class
+	 * Load the template, load views (with or without parameters) and then shows the final content.
 	 */
 	final class View {
 		
+		/** Page template. */
+		static private $template;
+		/** Views. */
+		static private $pages = [];
+		/** Parameters. */
+		static private $params = [];
+		
 		/**
-		 * Mostrar una vista contenida dentro de la carpeta de vistas, además
-		 * de abrir y cerrar la plantilla.
+		 * Load the template.
 		 * 
-		 * @param string $view Nombre del archivo de la vista (sin extensión).
-		 * @param array $params Array asociativo nombre-valor de los parámetros.
+		 * @param string $template Template filename (without extension).
 		 */
-		static public function full_render ($view, $params = []) {
-			self::render("layout/open");
-			self::render($view, $params);
-			self::render("layout/close");
+		static public function template ($template) {
+			self::$template = $template;
 		}
 		
 		/**
-		 * Mostrar una vista contenida dentro de la carpeta de vistas.
+		 * Load a view.
 		 * 
-		 * @param string $view Nombre del archivo de la vista (sin extensión).
-		 * @param array $params Array asociativo nombre-valor de los parámetros.
+		 * @param string $view View filename (without extension).
+		 * @param array $params name-value parameters array.
 		 */
-		static public function render ($view, $params = []) {
-			foreach ($params as $key => $value)
-				$$key = $value;
-			require_once Config::view_path . $view . ".php";
+		static public function load ($view, $params = []) {
+			self::$pages[]  = $view;
+			self::$params[$view] = $params;
+		}
+		
+		/**
+		 * Show the content of every loaded views.
+		 */
+		static public function show () {
+			$content   = "";
+			$full_page = "";
+			// Load content
+			foreach (self::$pages as $page) {
+				ob_start();
+				require_once Config::view_path . $page . ".php";
+				$content .= ob_get_contents();
+				// Parse parameters
+				foreach (self::$params[$page] as $param => $value) {
+					$content = str_replace("[[" . $param . "]]", $value, $content);
+					$content = str_replace("[[ " . $param . " ]]", $value, $content);
+				}
+				ob_end_clean();
+			}
+			// Load template if necessary
+			if (isset(self::$template)) {
+				ob_start();
+				require_once Config::template_path . "/" . self::$template . ".php";
+				$full_page = ob_get_contents();
+				ob_end_clean();
+				$full_page = str_replace("[[skrcontent]]", $content, $full_page);
+				$full_page = str_replace("[[ skrcontent ]]", $content, $full_page);
+			} else {
+				$full_page = $content;
+			}
+			// Show the view
+			echo $full_page;
 		}
 	}
 ?>

@@ -1,7 +1,7 @@
 <?php
 	/**
-	 * Clase Controller (controlador).
-	 * Procesa la petición del usuario y responde a ella adecuadamente.
+	 * Controller class
+	 * Process user's requests and reply to it.
 	 */
 	abstract class Controller {
 	}

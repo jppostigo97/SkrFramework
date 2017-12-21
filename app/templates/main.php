@@ -9,3 +9,6 @@
 	<?php link_script("script"); ?>
 </head>
 <body>
+	[[ skrcontent ]]
+</body>
+</html>

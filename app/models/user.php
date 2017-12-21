@@ -2,11 +2,12 @@
 
 	/*
 	
-	Model de ejemplo.
-	Crear un modelo es sencillo y se hace en tan solo 3 pasos:
-	1. Crear el archivo de modelo en la carpeta correspondiente (app/models/ por defecto).
-	2. Dentro, crear una clase nombrada en UpperCamelCase que extienda a Model.
-	3. Añadir todas las propiedades que equivalgan a campos en la base de datos y métodos a utilizar.
+	Example model.
+	How to create a model in just 3 steps.
+	1. Create the model file in its correspondent directory. (default is ~/app/models).
+	2. Create inside your new file a class named with UpperCamelCase that extends from Model.
+	3. Add all the properties with the same name as in your database
+		and all the methods that you want to use.
 	
 	*/
 
@@ -23,10 +24,10 @@
 		public $user_key;
 		
 		/**
-		 * Buscar un usuario con un email concreto.
+		 * Find an user whose email is...
 		 * 
-		 * @param string $email Email del usuario.
-		 * @param mysqli_result|bool Resultado de la consulta o *false* si no se ha encontrado.
+		 * @param string $email User's email.
+		 * @param mysqli_result|bool Query result or *false* if no user found.
 		 */
 		public function find_by_email($email) {
 			$result = $this->connection->query(
@@ -35,10 +36,10 @@
 		}
 		
 		/**
-		 * Buscar un usuario con un nombre concreto.
+		 * Find an user whose username is..
 		 * 
-		 * @param string $username Nombre del usuario.
-		 * @param mysqli_result|bool Resultado de la consulta o *false* si no se ha encontrado.
+		 * @param string $username User's username.
+		 * @param mysqli_result|bool Query result or *false* if no user found.
 		 */
 		public function find_by_username($username) {
 			$result = $this->connection->query(

@@ -1,19 +1,16 @@
 <?php
 	/**
-	 * Clase Model (modelo).
+	 * Model class.
 	 */
 	abstract class Model {
 		
-		/** Conexión con la base de datos. */
+		/** Database connection. */
 		public $connection;
-		/** Campo ID. */
+		/** ID field. */
 		public $id;
-		/** Nombre de la tabla. */
+		/** Table name. */
 		public $table;
 		
-		/**
-		 * Construir un nuevo modelo.
-		 */
 		public function __construct () {
 			$this->connection = new mysqli(Config::db_host, Config::db_user,
 				Config::db_pass, Config::db_name);
@@ -22,18 +19,15 @@
 			$this->id    = strtolower(get_class($this))."id";
 		}
 		
-		/**
-		 * Cerrar la conexión al destruir el modelo.
-		 */
 		public function __destruct () {
 			$this->connection->close();
 		}
 		
 		/**
-		 * Añadir un registro a la tabla.
+		 * Create a new object inside the database.
 		 * 
-		 * @param array $new Array asociativo que representa al nuevo registro.
-		 * @return bool Si se ha realizado exitosamente la inserción o no.
+		 * @param array $new New object (as array).
+		 * @return bool If the query went ok or not.
 		 */
 		public function add ($new) {
 			$first  = true;
@@ -54,10 +48,10 @@
 		}
 		
 		/**
-		 * Eliminar el registro con el ID especificado.
+		 * Delete an object in the database wich has the specified ID.
 		 * 
-		 * @param int $id ID del registro.
-		 * @return bool Si la consulta se ha llevado acabo exitosamente o no.
+		 * @param int $id Object ID.
+		 * @return bool If the query went ok or not.
 		 */
 		public function delete ($id) {
 			$result = $this->connection->query("DELETE FROM $this->table WHERE $this->id=$id;");
@@ -65,10 +59,10 @@
 		}
 		
 		/**
-		 * Buscar el registro con el ID especificado.
+		 * Search an object inside the database.
 		 * 
-		 * @param int $id ID del registro.
-		 * @return Model|bool Objeto encontrado o *false* si no se ha encontrado.
+		 * @param int $id Object ID.
+		 * @return Model|bool Found object or *false* if it hasn't been found.
 		 */
 		public function find ($id) {
 			$result = $this->connection->query("SELECT * FROM $this->table WHERE $this->id=$id;");
@@ -76,11 +70,11 @@
 		}
 		
 		/**
-		 * Actualizar un registro de la tabla.
+		 * Update an object inside the database.
 		 * 
-		 * @param int $id ID del registro a actualizar.
-		 * @param array $new Array asociativo que representa los cambios del registro.
-		 * @return bool Si se ha realizado exitosamente la actualización o no.
+		 * @param int $id Object ID.
+		 * @param array $new Updated object fields (as array).
+		 * @return bool If the query went okay or not.
 		 */
 		public function update ($id, $new) {
 			$first  = true;
@@ -96,10 +90,10 @@
 		}
 		
 		/**
-		 * Codificar una cadena de caracteres.
+		 * Encode a string.
 		 * 
-		 * @param string $string Cadena de caracteres a codificar.
-		 * @return string Cadena de caracteres codificada.
+		 * @param string $string String to encode.
+		 * @return string Encoded string.
 		 */
 		static public function encode ($string) {
 			$tc = new mysqli(Config::db_host, Config::db_name, Config::db_pass);
@@ -109,14 +103,12 @@
 		}
 		
 		/**
-		 * Decodificar una cadena de caracteres, pudiendo buscar y sustituir subcadenas.
+		 * Decode a string.
 		 * 
-		 * @param string $string Cadena de caracteres codificada.
-		 * @param array $search Conjunto de cadenas de caracteres a buscar.
-		 * @param array $replace Conjunto de cadena de caracteres a reemplazar.
-		 * @return string Cadena de caracteres decodificada.
+		 * @param string $string String to decode.
+		 * @return string Decoded string.
 		 */
-		static public function decode ($string, $search = [], $replace = []) {
+		static public function decode ($string) {
 			return stripcslashes(htmlspecialchars($string));
 		}
 	}

@@ -1,13 +1,16 @@
 <?php
-	// Habilitar el uso de sesiones
+	/**
+	 * Skr Version: 0.3.0
+	 */
+
+	// Enable sessions
 	session_start();
 
-	// Edita el APP_PATH para que todos los enlaces funcionen correctamente
-	// IMPORTANTE que APP_PATH termine en /
-	// Sustituir "/SkrFramework" por la ruta de tu aplicación dentro del servidor o dejar vacía.
+	// Edit APP_PATH for making all linked files and hyperlinks work properly.
+	// IMPORTANT: APP_PATH should finish with /
+	// Substitute "SkrFramework" with your app path inside your server or leave it just as /.
 	define("APP_PATH", "http://" . $_SERVER['SERVER_NAME']. "/SkrFramework/");
 	
-	// Insertar archivos básicos del framework
 	require_once "application.php";
 	require_once "config.php";
 	require_once "controller.php";
