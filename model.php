@@ -70,6 +70,15 @@
 		}
 		
 		/**
+		 * Search all abjects inside the database.
+		 * 
+		 * @return mysqli_result Object list.
+		 */
+		public function get_all () {
+			return $this->connection->query("SELECT * FROM $this->table;");
+		}
+		
+		/**
 		 * Update an object inside the database.
 		 * 
 		 * @param int $id Object ID.
