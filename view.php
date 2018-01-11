@@ -40,6 +40,8 @@
 			$full_page = "";
 			// Load content
 			foreach (self::$pages as $page) {
+				foreach (self::$params[$page] as $param => $value)
+					$$param = $value;
 				ob_start();
 				require_once Config::view_path . $page . ".php";
 				$content .= ob_get_contents();

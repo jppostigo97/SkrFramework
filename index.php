@@ -1,6 +1,6 @@
 <?php
 	/**
-	 * Skr Version: 0.3.0
+	 * Skr Version: 0.3.2
 	 */
 
 	// Enable sessions
