@@ -4,9 +4,9 @@
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
-	<title><?= title() ?></title>
-	<?php link_css("style"); ?>
-	<?php link_script("script"); ?>
+	<title><?= Application::title() ?></title>
+	<?php Application::link_css("style"); ?>
+	<?php Application::link_script("script"); ?>
 </head>
 <body>
 	[[ skrcontent ]]

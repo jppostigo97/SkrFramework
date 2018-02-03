@@ -1,6 +1,6 @@
 <?php
 	/**
-	 * Skr Version: 0.3.2
+	 * Skr Version: 0.3.3
 	 */
 
 	// Enable sessions
@@ -14,7 +14,6 @@
 	require_once "application.php";
 	require_once "config.php";
 	require_once "controller.php";
-	require_once "functions.php";
 	require_once "model.php";
 	require_once "view.php";
 	
